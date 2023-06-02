@@ -41,5 +41,5 @@ jobs:
         run: |
           docker build --no-cache  \
           -t $REGISTRY/$IMAGE_NAME:$IMAGE_TAG \
-          -f Dockerfile . \
+          -f Dockerfile .
           docker push $REGISTRY/$IMAGE_NAME:$IMAGE_TAG

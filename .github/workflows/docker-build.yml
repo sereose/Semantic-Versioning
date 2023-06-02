@@ -37,7 +37,7 @@ jobs:
       - name: Build image
         env:
           REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          REPOSITORY: ${{env.GBU_SERVICE}}
+          REPOSITORY: docker.io
           IMAGE_TAG: 0.0.1
         run: |
           docker build --no-cache --target candidate \

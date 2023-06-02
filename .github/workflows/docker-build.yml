@@ -34,19 +34,12 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Extract metadata (tags, labels) for Docker
-        id: meta
-        uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
-        with:
-          images: expouser/docker-teast
-
       - name: Build image
         env:
           REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           REPOSITORY: ${{env.GBU_SERVICE}}
-          IMAGE_TAG: ${{ steps.meta.outputs.tags }}
+          IMAGE_TAG: 0.0.1
         run: |
-          echo $REGISTRY
           docker build --no-cache --target candidate \
           -t $REGISTRY/$IMAGE_NAME:$IMAGE_TAG \
           -f Dockerfile . \

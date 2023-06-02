@@ -5,6 +5,11 @@ on:
     branches:
       - main
 
+env:
+  REGISTRY: docker.io
+  # github.repository as <account>/<repo>
+  IMAGE_NAME: docker-teast
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -35,11 +40,14 @@ jobs:
         with:
           images: expouser/docker-teast
 
-      - name: Build and push Docker image
-        uses: docker/build-push-action@3b5e8027fcad23fda98b2e3ac259d8d67585f671
-        with:
-          context: .
-          file: ./Dockerfile
-          push: true
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
+      - name: Build image
+        env:
+          REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          REPOSITORY: ${{env.GBU_SERVICE}}
+          IMAGE_TAG: ${{ steps.meta.outputs.tags }}
+        run: |
+          echo $REGISTRY
+          docker build --no-cache --target candidate \
+          -t $REGISTRY/$IMAGE_NAME:$IMAGE_TAG \
+          -f Dockerfile . \
+          docker push $REGISTRY/$IMAGE_NAME:$IMAGE_TAG

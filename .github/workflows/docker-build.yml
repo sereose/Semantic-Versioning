@@ -39,7 +39,7 @@ jobs:
           REPOSITORY: docker.io
           IMAGE_TAG: 0.0.1
         run: |
-          docker build --no-cache --target candidate \
+          docker build --no-cache  \
           -t $REGISTRY/$IMAGE_NAME:$IMAGE_TAG \
           -f Dockerfile . \
           docker push $REGISTRY/$IMAGE_NAME:$IMAGE_TAG

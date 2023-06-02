@@ -38,7 +38,7 @@ jobs:
       - name: Build image
         env:
           REPOSITORY: expouser
-          IMAGE_TAG: 0.0.1
+          IMAGE_TAG: 0.0.2
         run: |
           docker build --no-cache  \
           -t $REPOSITORY/$IMAGE_NAME:$IMAGE_TAG \

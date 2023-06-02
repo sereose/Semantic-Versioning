@@ -8,7 +8,7 @@ on:
 env:
   REGISTRY: docker.io
   # github.repository as <account>/<repo>
-  IMAGE_NAME: blockchain-node-lite
+  IMAGE_NAME: test
   REPOSITORY: expouser
 
 jobs:
@@ -38,7 +38,7 @@ jobs:
       - name: Build image
         env:
           REPOSITORY: expouser
-          IMAGE_TAG: 0.0.3
+          IMAGE_TAG: 0.0.4
         run: |
           docker build --no-cache  \
           -t $REPOSITORY/$IMAGE_NAME:$IMAGE_TAG \

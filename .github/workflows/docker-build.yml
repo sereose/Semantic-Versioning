@@ -9,6 +9,7 @@ env:
   REGISTRY: docker.io
   # github.repository as <account>/<repo>
   IMAGE_NAME: docker-teast
+  REPOSITORY: expouser
 
 jobs:
   build:
@@ -36,10 +37,10 @@ jobs:
 
       - name: Build image
         env:
-          REPOSITORY: docker.io
+          REPOSITORY: expouser
           IMAGE_TAG: 0.0.1
         run: |
           docker build --no-cache  \
           -t $REGISTRY/$IMAGE_NAME:$IMAGE_TAG \
           -f myapp/Dockerfile .
-          docker push $REGISTRY/$IMAGE_NAME:$IMAGE_TAG
+          docker push  $REGISTRY/$REPOSITORY/$IMAGE_NAME:$IMAGE_TAG

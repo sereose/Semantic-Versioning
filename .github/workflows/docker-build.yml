@@ -36,7 +36,6 @@ jobs:
 
       - name: Build image
         env:
-          REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           REPOSITORY: docker.io
           IMAGE_TAG: 0.0.1
         run: |

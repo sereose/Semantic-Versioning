@@ -36,7 +36,7 @@ jobs:
             latest_tag="v0"
           fi
           echo "LATEST_TAG=${latest_tag}" >> $GITHUB_ENV
-          
+
       - name: Increment Docker tag
         id: increment_tag
         run: |
@@ -46,19 +46,6 @@ jobs:
           echo "New tag is $NEW_TAG"
           echo "::set-output name=NEW_TAG::$NEW_TAG"
           echo "new_tag=${NEW_TAG"}" >> $GITHUB_ENV
-
-#      - name: Determine Docker Tag
-#        id: increment_tag
-#        run: |
-#          LAST_TAG=$(git describe --abbrev=0 --tags 2>/dev/null || echo "")
-#          if [[ $LAST_TAG =~ v[0-9]+\.[0-9]+ ]]; then
-#          MAJOR_MINOR=$(echo $LAST_TAG | awk -F'.' '{printf "%d.%d", $1, $2}')
-#          PATCH=$(echo $LAST_TAG | awk -F'.' '{printf "%d", $3}')
-#          NEW_TAG="$MAJOR_MINOR.$((PATCH + 1))"
-#          else
-#            NEW_TAG="v1.0.0"
-#          fi
-#          echo "DOCKER_TAG=${NEW_TAG}" >> $GITHUB_ENV
 
       - name: Build image
         env:

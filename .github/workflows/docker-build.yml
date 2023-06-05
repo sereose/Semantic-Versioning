@@ -44,7 +44,7 @@ jobs:
           TAG_NUMBER=$(echo ${{ env.LATEST_TAG }} | awk -F'v' '{printf "%d", $NF}')
           NEW_TAG=$(echo ${{ env.LATEST_TAG }} | awk -F'v' '{$NF = ""; printf "%s%d", $0, '${TAG_NUMBER}' + 1}')
           echo "New tag is $NEW_TAG"
-          echo "new_tag=${NEW_TAG"}" >> $GITHUB_ENV
+          echo "new_tag=${NEW_TAG}" >> $GITHUB_ENV
 
       - name: Build image
         env:
@@ -52,7 +52,7 @@ jobs:
           IMAGE_TAG: ${{ env.DOCKER_TAG }}
         run: |
           echo $IMAGE_TAG
-          echo ${{ env.NEW_TAG" }}
+          echo ${{ env.new_tag }}
           docker build --no-cache  \
           -t $REPOSITORY/$IMAGE_NAME:$IMAGE_TAG \
           -f myapp/Dockerfile .

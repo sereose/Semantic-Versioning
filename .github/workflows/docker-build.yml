@@ -31,12 +31,6 @@ jobs:
       - name: Get latest Docker tag
         id: get_latest_tag
         run: |
-#          latest_tag=$(git describe --abbrev=0 --tags --exclude='*[^0-9]*')
-#          if [[ -z "$latest_tag" ]]; then
-#            latest_tag="v0"
-#          fi
-#          echo "LATEST_TAG=${latest_tag}" >> $GITHUB_ENV
-#
           latest_tag=$(git describe --abbrev=0 --tags)
           if [[ -z "$latest_tag" ]]; then
           latest_tag="v0"

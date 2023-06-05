@@ -44,7 +44,6 @@ jobs:
           TAG_NUMBER=$(echo ${{ env.LATEST_TAG }} | awk -F'v' '{printf "%d", $NF}')
           NEW_TAG=$(echo ${{ env.LATEST_TAG }} | awk -F'v' '{$NF = ""; printf "%s%d", $0, '${TAG_NUMBER}' + 1}')
           echo "New tag is $NEW_TAG"
-          echo "::set-output name=NEW_TAG::$NEW_TAG"
           echo "new_tag=${NEW_TAG"}" >> $GITHUB_ENV
 
       - name: Build image

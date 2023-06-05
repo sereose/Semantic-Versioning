@@ -31,7 +31,7 @@ jobs:
       - name: Get latest Docker tag
         id: get_latest_tag
         run: |
-          NEW_TAG=$(git log -1 --pretty=format:%h)-$(date +"%Y%m%d%H%M%S")
+          NEW_TAG=$(git log -1 --pretty=format:%h)-$(date +"%Y-%-m-%-d-%-H-%-M-%-S")
           echo "new_tag=${NEW_TAG}" >> $GITHUB_ENV
 
       - name: Increment Docker tag
@@ -42,7 +42,7 @@ jobs:
       - name: Build image
         env:
           REPOSITORY: expouser
-          IMAGE_TAG: ${{ env.DOCKER_TAG }}
+          IMAGE_TAG: ${{ env.new_tag }}
         run: |
           echo $IMAGE_TAG
           echo ${{ env.new_tag }}

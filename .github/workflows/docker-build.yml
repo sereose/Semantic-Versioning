@@ -31,20 +31,13 @@ jobs:
       - name: Get latest Docker tag
         id: get_latest_tag
         run: |
-          latest_tag=$(git describe --abbrev=0 --tags)
-          if [[ -z "$latest_tag" ]]; then
-          latest_tag="v0"
-          fi
-          echo "LATEST_TAG=${latest_tag}" >> $GITHUB_ENV
+          NEW_TAG=$(git log -1 --pretty=format:%h)$(date +"%Y%m%d%H%M%S")
+          echo "new_tag=${NEW_TAG}" >> $GITHUB_ENV
 
       - name: Increment Docker tag
         id: increment_tag
         run: |
-          echo "Latest tag is ${{ env.LATEST_TAG }}"
-          TAG_NUMBER=$(echo ${{ env.LATEST_TAG }} | awk -F'v' '{printf "%d", $NF}')
-          NEW_TAG=$(echo ${{ env.LATEST_TAG }} | awk -F'v' '{$NF = ""; printf "%s%d", $0, '${TAG_NUMBER}' + 1}')
-          echo "New tag is $NEW_TAG"
-          echo "new_tag=${NEW_TAG}" >> $GITHUB_ENV
+          echo ${{ env.new_tag }}
 
       - name: Build image
         env:

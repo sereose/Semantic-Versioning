@@ -31,7 +31,7 @@ jobs:
       - name: Get latest Docker tag
         id: get_latest_tag
         run: |
-          NEW_TAG=$(git log -1 --pretty=format:%h)$(date +"%Y%m%d%H%M%S")
+          NEW_TAG=$(git log -1 --pretty=format:%h)-$(date +"%Y%m%d%H%M%S")
           echo "new_tag=${NEW_TAG}" >> $GITHUB_ENV
 
       - name: Increment Docker tag

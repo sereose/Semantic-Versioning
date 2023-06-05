@@ -39,6 +39,7 @@ jobs:
       - name: Determine Docker Tag
         id: increment_tag
         run: |
+
           LAST_TAG=$(git describe --abbrev=0 --tags 2>/dev/null || echo "")
           if [[ $LAST_TAG =~ v[0-9]+\.[0-9]+ ]]; then
           MAJOR_MINOR=$(echo $LAST_TAG | awk -F'.' '{printf "%d.%d", $1, $2}')
@@ -54,6 +55,7 @@ jobs:
           IMAGE_TAG: ${{ env.DOCKER_TAG }}
         run: |
           echo $IMAGE_TAG
+          echo ${{ env.DOCKER_TAG }}
           docker build --no-cache  \
           -t $REPOSITORY/$IMAGE_NAME:$IMAGE_TAG \
           -f myapp/Dockerfile .

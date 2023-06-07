@@ -28,7 +28,7 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Get latest Docker tag
+      - name: Create Docker tag
         id: get_latest_tag
         run: |
           NEW_TAG=$(git log -1 --pretty=format:%h)-$(date +"%Y-%-m-%-d-%-H-%-M-%-S")
